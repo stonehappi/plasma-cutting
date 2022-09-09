@@ -20,10 +20,10 @@ export class AppComponent {
   form = new FormGroup({
     width: new FormControl<number | null>(1, REQUIRED),
     length: new FormControl<number | null>(1, REQUIRED),
-    thickness: new FormControl<number | null>(5,
+    thickness: new FormControl<number | null>(3,
       [
         Validators.required,
-        Validators.min(5),
+        Validators.min(3),
         Validators.max(30)
       ]
     ),
