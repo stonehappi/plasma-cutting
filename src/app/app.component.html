@@ -1,41 +1,43 @@
-<mat-toolbar color="primary" class="px-1 flex flex-row justify-start">
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Plasma Cutting Calculator</span>
-</mat-toolbar>
-<form [formGroup]="form" class="flex flex-col p-4">
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Width</mat-label>
-    <input matInput formControlName="width" placeholder="Width" type="number">
-    <span matSuffix>mm</span>
-    <mat-hint>Width must be greater than 0</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Length</mat-label>
-    <input matInput formControlName="length" placeholder="Length" type="number">
-    <span matSuffix>mm</span>
-    <mat-hint>Length must be greater than 0</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Thickness</mat-label>
-    <input matInput formControlName="thickness" placeholder="Thickness" type="number">
-    <span matSuffix>mm</span>
-    <mat-hint [ngClass]="{'text-rose-600': isError('thickness')}">Thickness must between 3 and 30</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Steel Price Per Kg</mat-label>
-    <input matInput formControlName="steel" placeholder="Steel Price Per Kg" type="number">
-    <span matSuffix>$</span>
-    <mat-hint [ngClass]="{'text-rose-600': isError('steel')}">Steel Price must be greater than 0.001</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Hole Number</mat-label>
-    <input matInput formControlName="hole" placeholder="Hole Number" type="number">
-    <mat-hint [ngClass]="{'text-rose-600': isError('hole')}">Hole Number can not be negative</mat-hint>
-  </mat-form-field>
-  <div class="bg-gradient-to-r p-3 text-white rounded"
-       [class]="form.invalid ? 'from-rose-400 to-rose-600' : 'from-cyan-500 to-blue-500'">
-    Price: {{form.invalid ? 'Error' : total | currency}}
-  </div>
-</form>
+<app-sidebar>
+<!--  <mat-toolbar color="primary" class="px-1 flex flex-row justify-start">-->
+<!--    <button mat-icon-button>-->
+<!--      <mat-icon>menu</mat-icon>-->
+<!--    </button>-->
+<!--    <span>Plasma Cutting Calculator</span>-->
+<!--  </mat-toolbar>-->
+  <form [formGroup]="form" class="flex flex-col p-4">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Width</mat-label>
+      <input matInput formControlName="width" placeholder="Width" type="number">
+      <span matSuffix>mm</span>
+      <mat-hint>Width must be greater than 0</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Length</mat-label>
+      <input matInput formControlName="length" placeholder="Length" type="number">
+      <span matSuffix>mm</span>
+      <mat-hint>Length must be greater than 0</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Thickness</mat-label>
+      <input matInput formControlName="thickness" placeholder="Thickness" type="number">
+      <span matSuffix>mm</span>
+      <mat-hint [ngClass]="{'text-rose-600': isError('thickness')}">Thickness must between 3 and 30</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Steel Price Per Kg</mat-label>
+      <input matInput formControlName="steel" placeholder="Steel Price Per Kg" type="number">
+      <span matSuffix>$</span>
+      <mat-hint [ngClass]="{'text-rose-600': isError('steel')}">Steel Price must be greater than 0.001</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Hole Number</mat-label>
+      <input matInput formControlName="hole" placeholder="Hole Number" type="number">
+      <mat-hint [ngClass]="{'text-rose-600': isError('hole')}">Hole Number can not be negative</mat-hint>
+    </mat-form-field>
+    <div class="bg-gradient-to-r p-3 text-white rounded"
+         [class]="form.invalid ? 'from-rose-400 to-rose-600' : 'from-cyan-500 to-blue-500'">
+      Price: {{form.invalid ? 'Error' : total | currency}}
+    </div>
+  </form>
+</app-sidebar>
