@@ -17,7 +17,7 @@ export class AppComponent {
   total: number = 0;
   addUps$: Observable<AddUp[]>;
   hole: number = 0;
-  form = new FormGroup({
+  form: FormGroup = new FormGroup({
     width: new FormControl<number | null>(1, REQUIRED),
     length: new FormControl<number | null>(1, REQUIRED),
     thickness: new FormControl<number | null>(3,
@@ -30,12 +30,22 @@ export class AppComponent {
     steel: new FormControl<number>(1, Validators.min(0.001)),
     hole: new FormControl<number>(0, Validators.min(0)),
   });
+  thicknessMin: number = 3;
+  thicknessMax: number = 30;
 
   constructor(db: AngularFirestore) {
     this.addUps$ = db.collection<AddUp>('addUps', ref => ref.orderBy('value')).valueChanges();
     db.collection<Steel>('PricePerHole', ref => ref.orderBy('date', 'desc')).valueChanges()
       .pipe(map(m => m[0].price)).subscribe(value => this.hole = value);
-
+    db.doc('Setting/Thickness').valueChanges().subscribe((value: any) => {
+      this.thicknessMin = value['Min'];
+      this.thicknessMax = value['Max'];
+      this.form.get('thickness')?.setValidators([
+        Validators.required,
+        Validators.min(value['Min']),
+        Validators.max(value['Max'])
+      ]);
+    });
     this.form.valueChanges
       .pipe(filter(_ => this.form.valid))
       .subscribe((result) => {
