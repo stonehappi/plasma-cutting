@@ -19,14 +19,14 @@ export class AppComponent {
   form: FormGroup = new FormGroup({
     width: new FormControl<number | null>(null, REQUIRED),
     length: new FormControl<number | null>(null, REQUIRED),
-    thickness: new FormControl<number | null>(5,
+    thickness: new FormControl<number | null>(null,
       [
         Validators.required,
         Validators.min(3),
         Validators.max(30)
       ]
     ),
-    steel: new FormControl<number>(1, Validators.min(0.001)),
+    steel: new FormControl<number>(null, Validators.min(0.001)),
     hole: new FormControl<number>(0, Validators.min(0)),
   });
   thicknessMin: number = 3;
