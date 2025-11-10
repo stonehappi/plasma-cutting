@@ -5,7 +5,6 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AddUp, Steel} from "./app.model";
 
 const DENSITY = 7850;
-const COST_OF_MACHINING = 0.32;
 const REQUIRED = [Validators.required, Validators.min(1)];
 type INPUT_TYPE = 'thickness' | 'width' | 'length' | 'hole' | 'steel';
 
@@ -18,9 +17,9 @@ export class AppComponent {
   addUps$: Observable<AddUp[]>;
   hole: number = 0;
   form: FormGroup = new FormGroup({
-    width: new FormControl<number | null>(1, REQUIRED),
-    length: new FormControl<number | null>(1, REQUIRED),
-    thickness: new FormControl<number | null>(3,
+    width: new FormControl<number | null>(null, REQUIRED),
+    length: new FormControl<number | null>(null, REQUIRED),
+    thickness: new FormControl<number | null>(5,
       [
         Validators.required,
         Validators.min(3),
@@ -58,8 +57,8 @@ export class AppComponent {
   }
 
   onCalculate(width: number, length: number, thickness: number, hole: number, steel: number): void {
-    const volume = (width * thickness * length + (10 * width) + (10 * length)) / 1000000000;
+    const volume = ((width + 5) * thickness * (length + 5)) / 1000000000;
     const costOfMaterial = volume * DENSITY * steel;
-    this.total = (costOfMaterial + COST_OF_MACHINING) + (hole * this.hole);
+    this.total = costOfMaterial + (hole * this.hole);
   }
 }
